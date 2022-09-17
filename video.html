@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+    <link rel="stylesheet" href="./navbar.css">
+    <link rel="stylesheet" href="./video.css">
+</head>
+<body onload="playVideo()">
+    <div id="navbar">
+        <div>
+            <a href="index.html"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzUycHQiIGhlaWdodD0iNzUycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDc1MiA3NTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8Zz4KICA8cGF0aCBkPSJtNTcyLjU0IDUxMy4zNGgtMzg4LjM0Yy0xMS44NCAwLTIxLjMxMi05LjQ3MjctMjEuMzEyLTIxLjMxMnM5LjQ3MjctMjEuMzA5IDIxLjMwOS0yMS4zMDloMzg4LjM0YzExLjg0IDAgMjEuMzEyIDkuNDcyNyAyMS4zMTIgMjEuMzEyIDAgMTEuODM2LTkuNDY4OCAyMS4zMDktMjEuMzA5IDIxLjMwOXoiLz4KICA8cGF0aCBkPSJtNTcyLjU0IDM5NC45NWgtMzg4LjM0Yy0xMS44NCAwLTIxLjMxMi05LjQ3MjctMjEuMzEyLTIxLjMxMiAwLTExLjg0IDkuNDcyNy0yMS4zMDkgMjEuMzA5LTIxLjMwOWgzODguMzRjMTEuODQgMCAyMS4zMTIgOS40NzI3IDIxLjMxMiAyMS4zMTIgMCAxMS44MzYtOS40Njg4IDIxLjMwOS0yMS4zMDkgMjEuMzA5eiIvPgogIDxwYXRoIGQ9Im01NzIuNTQgMjc2LjU1aC0zODguMzRjLTExLjg0IDAtMjEuMzEyLTkuNDcyNy0yMS4zMTItMjEuMzEyIDAtMTEuODQgOS40NzI3LTIxLjMxMiAyMS4zMDktMjEuMzEyaDM4OC4zNGMxMS44NCAwIDIxLjMxMiA5LjQ3MjcgMjEuMzEyIDIxLjMxMiAwIDExLjg0LTkuNDY4OCAyMS4zMTItMjEuMzA5IDIxLjMxMnoiLz4KIDwvZz4KPC9zdmc+Cg==" alt=""></a>
+            <a href="index.html"><img src="https://static.vecteezy.com/system/resources/previews/003/206/623/original/youtube-editorial-app-icon-free-vector.jpg" alt=""></a>
+            <a href="index.html"><sup>IN</sup></a>
+            
+        </div>
+        <div>
+            <div>
+                <input type="text" placeholder="Search" id="query">
+                <button><img src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-1.png" alt=""></button>
+            </div>
+            <a href="index.html"><img src="mice.jpg" alt=""></a>
+        </div>
+        <div>
+            <img src="create.jpg" alt="">
+            <img src="YouTube Apps.jpg" alt="">
+            <img src="Notifications.jpg" alt="">
+            <img src="https://cdn-icons-png.flaticon.com/512/236/236831.png" alt="">
+        </div>
+    </div>
+    <!-- <h1>Play Video</h1> -->
+    <div id="content">
+        <div>
+            <iframe width="100%" 
+                height="515" 
+                id="play_video"
+                src="" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+            <p id="description"></p>
+            <p id="title"></p>
+        </div>
+        <div id="allVideos">
+
+        </div>
+    </div>
+    
+</body>
+<script>
+    let playVideo= ()=>{
+        let video=JSON.parse(localStorage.getItem("video"));
+        console.log(video);
+        let id=video.id.videoId;
+        let play_video=document.querySelector("#play_video");
+        play_video.src=`https://www.youtube.com/embed/${id}`;
+        document.querySelector("#title").innerText=video.snippet.title;
+        document.querySelector("#description").innerText=video.snippet.description;
+    }
+let data=JSON.parse(localStorage.getItem("videos")) || [];
+
+
+document.querySelector("#allVideos").innerHTML="";
+data.forEach((el)=>{
+    //snippet --> title
+    //snippet--> thumbnails--> medium --->url
+
+    let img=document.createElement("img");
+    img.src = el.snippet.thumbnails.medium.url;
+
+    let h3=document.createElement("h3");
+    h3.innerText = el.snippet.title;
+
+    let div=document.createElement("div");
+    div.onclick= () => {
+        saveVideo(el);
+    };
+    div.setAttribute("class", "video");
+    div.append(img,h3);
+
+    document.querySelector("#allVideos").append(div);
+});
+
+
+</script>
+
+</html>
