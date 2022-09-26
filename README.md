@@ -1,7 +1,7 @@
 # YouTube_clone
 
 This is YouTube clone web Application where we can watch videos. I have tried my best to make the website.
-This Project given by [Masai School](https://github.com/masai-course) during I learing HTML, CSS, JavaScript, And ES6
+This Project given by [Masai School](https://github.com/masai-course) during I learning  HTML, CSS, JavaScript, And ES6
 It was individual project built by me in 1 day
 
 ## Tech-Stack
